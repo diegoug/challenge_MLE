@@ -30,22 +30,22 @@ class DelayModel:
             - If target_column is specified, returns (features, target).
             - Otherwise, returns only features.
         """
-        # 1. Generate additional columns
-        data['period_day'] = data['Fecha-I'].apply(self.get_period_day)
-        data['high_season'] = data['Fecha-I'].apply(self.is_high_season)
-        data['min_diff'] = data.apply(self.get_min_diff, axis=1)
+        # Check if 'Fecha-I' and 'Fecha-O' are in the data for training
+        if 'Fecha-I' in data.columns and 'Fecha-O' in data.columns:
+            # 1. Generate additional columns
+            data['period_day'] = data['Fecha-I'].apply(self.get_period_day)
+            data['high_season'] = data['Fecha-I'].apply(self.is_high_season)
+            data['min_diff'] = data.apply(self.get_min_diff, axis=1)
 
-        # In case the delay column is not present, we create it (>15 minutes).
-        if 'delay' not in data.columns:
-            data['delay'] = np.where(data['min_diff'] > 15, 1, 0)
+            # In case the delay column is not present, we create it (>15 minutes).
+            if 'delay' not in data.columns:
+                data['delay'] = np.where(data['min_diff'] > 15, 1, 0)
 
         # 2. Generate dummy variables (one-hot encoding).
         features = pd.concat([
             pd.get_dummies(data['OPERA'], prefix='OPERA'),
             pd.get_dummies(data['TIPOVUELO'], prefix='TIPOVUELO'),
             pd.get_dummies(data['MES'], prefix='MES'),
-            # Although we initially calculated period_day, the test does not require those dummies.
-            # We only need the "top 10" columns required by the test:
         ], axis=1)
 
         # 3. Adjust exactly to the expected columns in the test:
