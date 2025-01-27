@@ -1,29 +1,29 @@
-# Imagen base de Python
+# Base Python image
 FROM python:3.9-slim
 
-# Establecer el directorio de trabajo dentro del contenedor
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copiar los archivos del proyecto al contenedor
+# Copy project files to the container
 COPY . /app
 
-# Instalar dependencias del sistema (si necesitas paquetes específicos)
+# Install system dependencies (if you need specific packages)
 RUN apt-get update && apt-get install -y \
     build-essential \
     libssl-dev \
     libffi-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Crear y activar un entorno virtual en el contenedor
+# Create and activate a virtual environment in the container
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Instalar las dependencias del proyecto
+# Install project dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt -r requirements-dev.txt -r requirements-test.txt
 
-# Puerto por defecto (si estás corriendo la API desde aquí)
+# Default port (if you are running the API from here)
 EXPOSE 8000
 
-# Comando por defecto para acceder al contenedor
+# Default command to access the container
 CMD ["bash"]
