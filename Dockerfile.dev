@@ -23,7 +23,7 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt -r requirements-dev.txt -r requirements-test.txt
 
 # Default port (if you are running the API from here)
-EXPOSE 8080
+EXPOSE 8000
 
-# Default command to run the API with Gunicorn
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8080", "challenge.api:app"]
+# Default command to access the container
+CMD ["bash"]

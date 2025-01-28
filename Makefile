@@ -23,7 +23,7 @@ install:		## Install dependencies
 	pip install -r requirements-test.txt
 	pip install -r requirements.txt
 
-STRESS_URL = http://127.0.0.1:8000 
+STRESS_URL = https://flight-delay-api-367321049314.us-central1.run.app
 .PHONY: stress-test
 stress-test:
 	# change stress url to your deployed app 
@@ -43,3 +43,21 @@ api-test:			## Run tests and coverage
 .PHONY: build
 build:			## Build locally the python artifact
 	python setup.py bdist_wheel
+
+.PHONY: start-development
+start-development:  ## Start development environment (use BUILD=1 for rebuild, DEBUG=1 for debug mode)
+	@if [ "$(BUILD)" = "1" ]; then \
+		echo "Building Docker Compose environment..."; \
+		docker-compose up --build; \
+	elif [ "$(DEBUG)" = "1" ]; then \
+		echo "Starting Docker Compose in debug mode with override..."; \
+		docker-compose -f docker-compose.yml -f docker-compose.override.yml up; \
+	else \
+		echo "Starting Docker Compose environment..."; \
+		docker-compose up; \
+	fi
+
+.PHONY: stop-development
+stop-development:   ## Stop development environment
+	@echo "Stopping Docker Compose environment..."
+	docker-compose down
