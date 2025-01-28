@@ -1,4 +1,13 @@
-```markdown
+
+# Note
+
+First of all, I would like to apologize as I was unable to fully complete the CI/CD pipeline and the application deployment on Google Cloud. The reason is that the time allotted for the challenge was not sufficient for me, as I had previously planned family activities during the weekend, which left me with limited time to address all aspects of the challenge.
+
+That being said, I believe I have done a solid job on the parts I was able to complete, and I am submitting my work for your review. I hope it demonstrates my capabilities and merits consideration for the opportunity to work with you.
+
+Thank you very much for this opportunity, and I truly appreciate your time and understanding.
+
+
 ## Development Mode
 
 The project supports a development mode for running the environment with Docker Compose. This includes options for building the containers, running in standard mode, and debugging.
