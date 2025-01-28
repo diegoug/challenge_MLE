@@ -8,6 +8,21 @@
         "program": "${workspaceFolder}/challenge/model.py",
         "console": "integratedTerminal",
         "envFile": "${workspaceFolder}/.env"
+      },
+      {
+        "name": "Run Pytest",
+        "type": "python",
+        "request": "launch",
+        "module": "pytest",
+        "args": [
+            "--cov=challenge",
+            "--cov-report=term",
+            "--cov-report=html:reports/html",
+            "--cov-report=xml:reports/coverage.xml",
+            "--junitxml=reports/junit.xml"
+        ],
+        "console": "integratedTerminal",
+        "envFile": "${workspaceFolder}/.env"
       }
     ]
   }

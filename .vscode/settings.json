@@ -3,10 +3,10 @@
         79,
         120
     ],
-    "terminal.integrated.cwd": "/home/app",
     "search.exclude": {
       "**/.vscode-server-insiders/**": true,
       "**/.cache/**": true,
       "**/.cursor-server/**": true
-    }
+    },
+    "python.envFile": "${workspaceFolder}/.env"
 }
